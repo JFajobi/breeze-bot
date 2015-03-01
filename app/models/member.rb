@@ -5,7 +5,7 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :status
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
   # attr_accessible :title, :body
 
   has_many :reservations
@@ -28,7 +28,7 @@ class Member < ActiveRecord::Base
       return past_car if past_car.unoccupied?
     end
 
-    potential_rentals = Car.all.where(status: 'unoccupied')
+    potential_rentals = Car.where(status: 'unoccupied')
 
     return false if potential_rentals.empty?
     potential_rentals.first
@@ -46,7 +46,7 @@ class Member < ActiveRecord::Base
   end
 
   def book_vacant_car(date)
-    @potential_cars = Car.all.where(status: [:pending_return, :unoccupied])
+    @potential_cars = Car.where(status: [:pending_return, :unoccupied])
     return false if @potential_cars.empty?
     unoccupied_cars = @potential_cars.keep_if{ |car| car.status == 'unoccupied'}
     return false if unoccupied_cars.empty?

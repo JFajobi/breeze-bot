@@ -1,6 +1,7 @@
 class StatsService
 
   class << self
+
     def unoccupied_cars_by_date(date)
       Car.all.keep_if{ |car| !car.occupied_on_date?(date)}
     end
@@ -31,8 +32,10 @@ class StatsService
       reservations.map do |res|
         if res.end_date.nil? or (res.end_date > end_date)
           res.end_date = end_date
+        end
         if res.start_date < start_date
           res.start_date = start_date
+        end
       end
     end
 

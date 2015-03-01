@@ -5,7 +5,7 @@ class Car < ActiveRecord::Base
   has_many :members, through: :reservations
 
   state_machine :status, initial: :unoccupied do
-    after_transition :on => :being_serviced, :do => :on_being_serviced
+    after_transition :on => :vacate, :do => :on_vacated
 
     event :reserve do
       transition :unoccupied => :pending_pickup
@@ -25,13 +25,21 @@ class Car < ActiveRecord::Base
     end
   end
 
+  def on_vacated
+    # TODO: !!!
+    # if start_date is after end_date (cancelled reservation and never picked up car)
+    # should I just delete the reservation?
+    self.reservations.last.update_attributes end_date: Date.today
+  end
+
   def occupied_on_date?(date)
     # look for all reservations that happened on or before the date specified
     potential_reservations = reservations.where("start_date <= ?", date)
     potential_reservations.each do |res|
       # if the end date is empty, we know the car is still in use
       return true if res.end_date.nil?
-      return true if (start_date..end_date) === date
+      # The car is not scheduled to come back until after the requested start date
+      return true if res.end_date > date #(start_date..end_date) === date
     end
     false
   end
