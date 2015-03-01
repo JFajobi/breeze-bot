@@ -27,7 +27,7 @@ class Car < ActiveRecord::Base
 
   def occupied_on_date?(date)
     # look for all reservations that happened on or before the date specified
-    potential_reservations = reservations.where("start_timestamp <= ?", date)
+    potential_reservations = reservations.where("start_date <= ?", date)
     potential_reservations.each do |res|
       # if the end date is empty, we know the car is still in use
       return true if res.end_date.nil?

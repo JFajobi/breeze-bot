@@ -1,8 +1,8 @@
 class StatsService
 
   class << self
-    def unoccupied_cars_by_date(start_date, end_date)
-
+    def unoccupied_cars_by_date(date)
+      Car.all.keep_if{ |car| !car.occupied_on_date?(date)}
     end
 
     def percent_utilized_within_range(start_date, end_date)
