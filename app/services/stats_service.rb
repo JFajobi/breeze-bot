@@ -21,22 +21,29 @@ class StatsService
       return 0 if potential_reservations.empty?
 
       # remove any reservation that end before the start_date
-      utilized_car_reservations = potential_reservations.keep_if{ |res| res.end_date < start_date}
+      utilized_car_reservations = potential_reservations.keep_if{ |res| res.end_date.nil? || (res.end_date < start_date) }
       altered_reservations      = map_reservation_usage_time(start_date, end_date, utilized_car_reservations)
-      total_seconds_utilized    = altered_reservations.each{ |res| reservation_sum += (res.end_date - res.start_date) }
+      
+      # the total amount of time (days) that a fleet of cars were being utilized
+      altered_reservations.each{ |res| reservation_sum += ((res.end_date.to_time.to_i - res.start_date.to_time.to_i)/1.day.to_i) }
 
-      reservation_sum / total_occupiable_time
+      reservation_sum.to_f / total_occupiable_time.to_f
     end
 
+    # we only want to count the time a car was reserved inbetween our search window
+    # so if a reservation started before, or ends after (no set end date) we adjust 
     def map_reservation_usage_time(start_date, end_date, reservations)
-      reservations.map do |res|
+     reservations.map do |res|
+
         if res.end_date.nil? or (res.end_date > end_date)
           res.end_date = end_date
         end
+
         if res.start_date < start_date
           res.start_date = start_date
         end
       end
+      reservations
     end
 
     # the total amount of time (days) that a fleet of cars can be utilized
