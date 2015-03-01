@@ -30,7 +30,7 @@ class Car < ActiveRecord::Base
     potential_reservations.each do |res|
       # if the end date is empty, we know the car is still in use
       return true if res.end_date.nil?
-      return true if date === (start_date..end_date)
+      return true if (start_date..end_date) === date
     end
     false
   end
