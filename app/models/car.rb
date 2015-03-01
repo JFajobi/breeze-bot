@@ -1,6 +1,7 @@
 class Car < ActiveRecord::Base
   attr_accessible :license_number, :make, :model, :status, :enrolled_timestamp
 
+  has_many :reservations
   has_many :members, through: :reservations
 
   state_machine :status, initial: :unoccupied do

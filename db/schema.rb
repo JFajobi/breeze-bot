@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150301151559) do
+ActiveRecord::Schema.define(:version => 20150301180812) do
 
   create_table "cars", :force => true do |t|
     t.string   "model"
@@ -45,10 +45,11 @@ ActiveRecord::Schema.define(:version => 20150301151559) do
   create_table "reservations", :force => true do |t|
     t.integer  "member_id"
     t.integer  "car_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.date     "start_date"
     t.date     "end_date"
+    t.boolean  "active",     :default => true
   end
 
 end

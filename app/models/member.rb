@@ -8,30 +8,27 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :status
   # attr_accessible :title, :body
 
+  has_many :reservations
   has_many :cars, through: :reservations
 
 
-  # TODO: decide whether a user should be stateful at all
-  # state_machine :status, initial: :unoccupied do
-  #   after_transition :on => :being_serviced, :do => :on_being_serviced
+  def create_future_reservation(date)
 
-  #   event :reserve do
-  #     transition :unoccupied => :pending_pickup
-  #   end
+  end
 
-  #   event :occupy do
-  #     transition [:unoccupied, :pending_pickup] => :occupied
-  #   end
+  def create_immediate_reservation
+    
+  end
 
-  #   event :schedule_return do 
-  #     transition :occupied => :pending_return
-  #   end
+  def find_available_car
+    # if we already reserved a car before. Lets try and reserve that same one again
+    if !self.reservations.empty?
+      past_car = Car.find(self.reservations.last.car_id)      
+      return past_car if past_car.unoccupied?
+    end
 
-  #   # You should be able to change your mind and cancel your order
-  #   event :vacate do
-  #     transition [:pending_pickup, :occupied, :pending_return] => :unoccupied
-  #   end
-
-  # end
-
+    potential_rentals = Car.where(status: 'unoccupied')
+    return false if potential_rentals.empty?
+    potential_rentals.first
+  end
 end
