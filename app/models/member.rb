@@ -8,6 +8,7 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
   # attr_accessible :title, :body
 
+  after_create :update_dashboard
   has_many :reservations
   has_many :cars, through: :reservations
 
@@ -49,6 +50,15 @@ class Member < ActiveRecord::Base
     false
   end
 
+  # update admin dashboard with new stats
+  def update_dashboard
+    all_members   = Member.all
+    member_count  = all_members.count
+    new_this_week = all_members.keep_if{|user| (1.week.ago.to_date..Date.tomorrow).cover? user.created_at.to_date}.count
+    StatsService.update_admin_dashboard('current_members', 'current', member_count )
+    StatsService.update_admin_dashboard('new_members', 'current', new_this_week )
+
+  end
 
 
 

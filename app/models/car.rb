@@ -3,6 +3,7 @@ class Car < ActiveRecord::Base
 
   has_many :reservations
   has_many :members, through: :reservations
+  after_create :update_dashboard
 
   state_machine :status, initial: :unoccupied do
     after_transition :on => :vacate, :do => :on_vacated
@@ -30,6 +31,7 @@ class Car < ActiveRecord::Base
     # if start_date is after end_date (cancelled reservation and never picked up car)
     # should I just delete the reservation?
     self.reservations.last.update_attributes end_date: Date.today
+    update_fleet_utilization_percentage
   end
 
   def occupied_on_date?(date)
@@ -42,6 +44,18 @@ class Car < ActiveRecord::Base
       return true if res.end_date > date #(start_date..end_date) === date
     end
     false
+  end
+
+  # update admin dashboard with new stats
+  def update_dashboard
+    fleet_size = Car.all.count
+    update_fleet_utilization_percentage
+    StatsService.update_admin_dashboard('fleet_size', 'current', fleet_size )
+  end
+
+  def update_fleet_utilization_percentage
+    fleet_utilized_percentage = (StatsService.percent_utilized_within_range(Date.today, Date.tomorrow) * 100).to_i
+    StatsService.update_admin_dashboard('fleet_utilized', 'value', fleet_utilized_percentage )
   end
 
 end

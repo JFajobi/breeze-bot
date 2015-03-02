@@ -6,11 +6,16 @@ class StatsService
       Car.all.keep_if{ |car| !car.occupied_on_date?(date)}
     end
 
+    def update_admin_dashboard(widget_id, data_id, data_value)
+      HTTParty.post("http://localhost:3030/widgets/#{widget_id}",
+        :body => { "auth_token" => "YOUR_AUTH_TOKEN", "#{data_id}" => "#{data_value}" }.to_json)
+    end
+
     def percent_utilized_within_range(start_date, end_date)
       # fleet_size = Car.where(enrolled_timestamp === occupancy_range).count
       # for simplicity purposes I am assuming the fleet size stays the same
       fleet_size      = Car.all.count      
-      occupancy_range = start_date..end_date
+      occupancy_range = start_date..end_date # no longer used
       reservation_sum = 0
 
       total_occupiable_time = get_total_occupiable_time(fleet_size, start_date, end_date)
