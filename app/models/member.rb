@@ -8,23 +8,29 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
   # attr_accessible :title, :body
 
-  after_create :update_dashboard
+  after_save :update_dashboard
+  after_destroy :update_dashboard
   has_many :reservations
   has_many :cars, through: :reservations
 
 
   def create_reservation(date=nil)
     date = date || Date.today
-    return if book_previous_car(date)
-    return if book_vacant_car(date)
-    return if book_pending_car(date)
+    return true if book_previous_car(date)
+    return true if book_vacant_car(date)
+    return true if book_pending_car(date)
     false
   end
 
 
   def book_previous_car(date)
     if !self.reservations.empty?
-      past_car = Car.find(self.reservations.last.car_id)
+      begin
+        # Make sure the car is still in the fleet
+        past_car = Car.find(self.reservations.last.car_id)
+      rescue
+        past_car = Car.first
+      end
       
       if past_car.unoccupied? || !past_car.occupied_on_date?(date)
         return self.reservations.create car_id: past_car.id, start_date: date 

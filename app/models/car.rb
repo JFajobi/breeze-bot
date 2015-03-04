@@ -3,10 +3,12 @@ class Car < ActiveRecord::Base
 
   has_many :reservations
   has_many :members, through: :reservations
-  after_create :update_dashboard
+  after_save :update_dashboard
+  after_destroy :update_dashboard
 
   state_machine :status, initial: :unoccupied do
     after_transition :on => :vacate, :do => :on_vacated
+    after_transition :on => :occupy, :do => :update_fleet_utilization_percentage
 
     event :reserve do
       transition :unoccupied => :pending_pickup
@@ -30,7 +32,9 @@ class Car < ActiveRecord::Base
     # TODO: !!!
     # if start_date is after end_date (cancelled reservation and never picked up car)
     # should I just delete the reservation?
-    self.reservations.last.update_attributes end_date: Date.today
+    reservation = self.reservations.last
+    reservation.update_attributes end_date: Date.today, active: false
+    reservation.destroy if reservation.end_date < reservation.start_date
     update_fleet_utilization_percentage
   end
 

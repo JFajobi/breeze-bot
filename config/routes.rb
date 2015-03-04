@@ -50,7 +50,16 @@ BreezeBot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  post 'end_reservation/:car_id' =>'cars#end_reservation'
+  get "reserve_car" => 'cars#reserve_car'
+  get "pending_pickup" => 'cars#pending_pickup'
+  get "pending_return" => 'cars#pending_return'
+  get "return_car" => 'cars#return_car'
+  get "driving" => 'cars#occupied'
+  get 'find_car' => "cars#find_car"
+  get "determine_views" => 'actions#determine_view'
+  get 'home' => 'welcome#home'
+  root :to => 'welcome#home'
 
   # See how all your routes lay out with "rake routes"
 

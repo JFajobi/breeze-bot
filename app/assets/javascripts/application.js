@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require hamlcoffee
+//= require pickadate/picker
+//= require pickadate/picker.date
+//= require pickadate/picker.time
 //= require_tree .

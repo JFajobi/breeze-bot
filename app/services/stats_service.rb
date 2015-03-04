@@ -9,6 +9,8 @@ class StatsService
     def update_admin_dashboard(widget_id, data_id, data_value)
       HTTParty.post("http://localhost:3030/widgets/#{widget_id}",
         :body => { "auth_token" => "YOUR_AUTH_TOKEN", "#{data_id}" => "#{data_value}" }.to_json)
+      # HTTParty.post("http://localhost:3030/dashboards/breeze",
+      #   :body => { "auth_token" => "YOUR_AUTH_TOKEN", "event" => "reload" }.to_json)
     end
 
     def percent_utilized_within_range(start_date, end_date)

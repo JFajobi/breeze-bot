@@ -1,0 +1,4 @@
+%h1 Your #{@make} #{@model} with a license of #{@license} will be available for pickup on #{@date}
+
+
+= button_to "End Reservation","/end_reservation/#{@car.id}", {:controller => :cars, :action => 'end_reservation' }

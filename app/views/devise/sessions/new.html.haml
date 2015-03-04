@@ -1,0 +1,12 @@
+.signup
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+
+    .row.margin80
+      %div.span6.offset4
+        %br/
+        = f.email_field :email, autofocus: true, placeholder: "email address"
+      %div.span6.offset4
+        %br/
+        = f.password_field :password, autocomplete: "off", placeholder: "password"
+    
+      %div.span6.offset4.margin20= f.submit "Sign in", id: 'button'
