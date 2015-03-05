@@ -18,3 +18,4 @@
 //= require pickadate/picker.date
 //= require pickadate/picker.time
 //= require_tree .
+//= require_tree ./helpers

@@ -1,1 +1,19 @@
-%h1 return memeber
+%h1{:id=> @member} Would you like to schedule a return?
+
+%input.datepicker
+
+:coffeescript
+  $ ->
+
+    makeReservation = (context) ->
+      time = context['select']
+      currentTime = new Date()
+      if time >= currentTime.getTime()
+        id = $('h1').attr('id')
+        window.location= "/return_car?time=" + time/1000 + "&id=" + id
+      else
+        $('.alert').html("Please pick a date after today")
+
+    $('.datepicker').pickadate
+      disable: [{ from: -100, to: true }]
+      onSet: makeReservation

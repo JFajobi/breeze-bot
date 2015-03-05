@@ -1,4 +1,4 @@
-%h1{:id=> @member} When day would you like the car?
+%h1{:id=> @member} What day would you like the car?
 
 
 %input.datepicker
@@ -16,4 +16,5 @@
         $('.alert').html("Please pick a date after today")
 
     $('.datepicker').pickadate
+      disable: [{ from: -100, to: true }]
       onSet: makeReservation

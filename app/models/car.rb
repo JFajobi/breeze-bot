@@ -29,10 +29,8 @@ class Car < ActiveRecord::Base
   end
 
   def on_vacated
-    # TODO: !!!
-    # if start_date is after end_date (cancelled reservation and never picked up car)
-    # should I just delete the reservation?
     reservation = self.reservations.last
+    # if start_date is after end_date (cancelled reservation and never picked up car)
     reservation.update_attributes end_date: Date.today, active: false
     reservation.destroy if reservation.end_date < reservation.start_date
     update_fleet_utilization_percentage

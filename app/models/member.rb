@@ -42,7 +42,7 @@ class Member < ActiveRecord::Base
   def book_vacant_car(date)
     @potential_cars = Car.where(status: [:pending_return, :unoccupied])
     return false if @potential_cars.empty?
-    unoccupied_cars = @potential_cars.keep_if{ |car| car.status == 'unoccupied'}
+    unoccupied_cars = @potential_cars.keep_if{ |car| car.unoccupied?}
     return false if unoccupied_cars.empty?
     self.reservations.create car_id: unoccupied_cars.first.id, start_date: date 
   end

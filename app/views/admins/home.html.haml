@@ -1,0 +1,99 @@
+%h2 View active cars | view vacant cars | View actionable cars
+%h3 Launch Analytics Page
+
+
+
+%a#fill-div-green{ :href => '#activeModal', :role => "button", "data-toggle" => 'modal'} Active Cars
+
+%a#fill-div-green{ :href => '#vacantModal', :role => "button", "data-toggle" => 'modal'} Vacant Cars
+
+%a#fill-div-green{ :href => '#checkInModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked in 
+
+%a#fill-div-green{ :href => '#checkOutModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked out 
+
+%h2 Complete Fleet
+- for car in @cars
+  %h3 #{car.make} #{car.model} #{car.license_number}
+  = link_to 'car page', "/car/#{car.id}"
+
+
+#activeModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  .modal-body
+    - for car in @active_cars
+      %h1 #{car.model} #{car.make}
+      %h2 License: #{car.license_number}
+      - reservation = car.reservations.last
+      %h2 Active for: #{((Date.today.to_time - reservation.start_date.to_time)/1.day).round} days
+  .modal-footer
+    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+
+#vacantModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  .modal-body
+    - for car in @vacant_cars
+      %h1 #{car.model} #{car.make}
+      %h2 License: #{car.license_number}
+  .modal-footer
+    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+
+#checkOutModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  .modal-body
+    - for car in @picked_up_cars
+      %h1 #{car.model} #{car.make}
+      %h2 License: #{car.license_number}
+      %h2 Was this car picked up on #{car.reservations.last.start_date}
+      %h1.check_out_button{:id => car.id} Yes
+  .modal-footer
+    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+
+#checkInModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  .modal-body
+    - for car in @returned_cars
+      %h1 #{car.model} #{car.make}
+      %h2 License: #{car.license_number}
+      %h2 Was this car returned on #{car.reservations.last.end_date}
+      %h1.check_in_button{:id => car.id} Yes
+  .modal-footer
+    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+
+
+
+
+:coffeescript
+  $ ->
+    checkInCar = (e) ->
+      car_id = e.currentTarget.id
+       
+      $("#"+ e.currentTarget.id).html("The car has been sucessfully checked in")
+      
+     
+      $.postJSON '/check_in_car', {id: car_id}, (response) =>
+        console.log "Friend Request Made"
+
+
+
+    checkOutCar = (e)->
+     
+      car_id = e.currentTarget.id
+     
+      $("#"+ e.currentTarget.id).html("The car has been sucessfully checked out")
+      
+      $.postJSON '/check_out_car', {id: car_id}, (response) =>
+        console.log "Friend Request Made"
+
+     
+    $('.check_out_button').on('click', checkOutCar)
+    $('.check_in_button').on('click', checkInCar)
+
+
+
+
+
+

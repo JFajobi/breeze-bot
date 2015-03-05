@@ -1,0 +1,11 @@
+= link_to 'Back to admin home', '/admin'
+
+%h1 #{@car.make} #{@car.model}: #{@car.license_number}
+
+%h2 Unique Members Rented: #{@reservation_count}
+
+- if @reservation_count > 0
+  %h2 Rented By:
+  - for member_res in @uniq_member_reservations
+    - member = member_res.member
+    =link_to member.email, "/member/#{member.id}"
