@@ -7,6 +7,14 @@
 
 %a#fill-div-green{ :href => '#checkOutModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked out 
 
+%h4 Check percentage of fleet used in date range
+%input.date.startDate{:position => 'start', :placeholder => 'Start Date', :time => ''} 
+
+%input.date.endDate.hidden{:position => 'end', :placeholder => 'End Date', :time => ''} 
+
+.info
+
+
 %h3 Launch Analytics Page
 
 %h2 Complete Fleet
@@ -66,6 +74,37 @@
 
 :coffeescript
   $ ->
+
+    checkReservationRange = (context) ->
+      return unless context['select'] 
+      if $('.startDate').attr('time') == ''
+        $('.startDate').attr('time', context['select']/1000 )
+        $('.date').toggleClass('hidden')
+        return
+      start_date = $('.startDate').attr('time')
+      end_date = context['select']/1000
+
+      return $('.alert').html("End Date Must Be Later Than Start Date") if parseInt(start_date) > parseInt(end_date)
+
+      $('.startDate').attr('time', '')
+      $('.startDate').val('')
+      $('.endDate').attr('time', '')
+      $('.startDate').removeClass('hidden')
+      $('.endDate').addClass('hidden')
+      
+
+      $.postJSON "/check_fleet_utilization", {start_date: start_date, end_date: end_date}, (response) =>
+          $('.info').html 'From ' + response.start + ' to ' + response.end + ' ' + response.percent + '% of the fleet was utilized'
+        
+
+
+    $('.date').pickadate
+      onSet: checkReservationRange
+
+
+
+
+
     checkInCar = (e) ->
       car_id = e.currentTarget.id
        
@@ -74,7 +113,6 @@
      
       $.postJSON '/check_in_car', {id: car_id}, (response) =>
         console.log "Friend Request Made"
-
 
 
     checkOutCar = (e)->

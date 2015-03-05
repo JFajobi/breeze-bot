@@ -54,6 +54,7 @@ BreezeBot::Application.routes.draw do
   get 'member/:id' => 'admins#member_show'
   get 'car/:id' => 'admins#car_show'
   get 'admin' => 'admins#home'
+  post 'check_fleet_utilization' =>'admins#check_fleet_utilization'
   post 'check_reservation_on_date/:car_id' =>'admins#check_reservation'
   post 'end_reservation/:car_id' =>'cars#end_reservation'
   post 'check_in_car' => 'admins#vacate_car'
