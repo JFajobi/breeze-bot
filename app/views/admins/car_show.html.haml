@@ -9,3 +9,26 @@
   - for member_res in @uniq_member_reservations
     - member = member_res.member
     =link_to member.email, "/member/#{member.id}"
+
+Check if Car was checked out on a date
+%input.datepicker{:car_id => @car.id}
+.info
+
+:coffeescript
+  $ ->
+
+    checkReservation = (context) ->
+      return unless context['select']
+      time = context['select'] / 1000
+      car_id = $('input').attr('car_id')
+
+      $.postJSON "/check_reservation_on_date/" + car_id, {car_id: car_id, time: time}, (response) =>
+        date = $('input').val()
+        if response.result
+          $('.info').html 'This car was booked on ' + date
+        else
+          $('.info').html 'This car was available on ' + date
+
+
+    $('.datepicker').pickadate
+      onSet: checkReservation

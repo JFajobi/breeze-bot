@@ -8,5 +8,11 @@
   %body
     %p.notice= notice
     %p.alert= alert
+    
+    - action_count = Reservation.get_actionable_reservation_count
+    #{action_count} reservations need your attention
+
+    = link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'nav left-nav-green'
+
     .container
       = yield

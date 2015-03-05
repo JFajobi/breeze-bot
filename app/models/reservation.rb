@@ -12,7 +12,25 @@ class Reservation < ActiveRecord::Base
     car.reserve
   end
 
+  def days_left_in_reservation
+    return if end_date.nil? || !active
+    days = end_date - Date.today
+    days < 0 ? 0 : days
+  end
 
+  def days_to_pickup
+    return 0 if start_date >= Date.today
+    start_date - Date.today
+  end
+
+  def self.get_actionable_reservation_count
+    checkout_cars = Reservation.includes(:car).where("start_date <= ?", Date.today)
+    checkin_cars = Reservation.includes(:car).where("end_date >= ?", Date.today)
+
+    car_actions_count = checkout_cars.keep_if{|r| r.car.pending_pickup?}.count
+    car_actions_count+= checkin_cars.keep_if{|r| r.car.pending_return?}.count
+  end
+  
   # update admin dashboard with new stats
   def update_dashboard
     fleet_utilized_percentage = (StatsService.percent_utilized_within_range(Date.today, Date.tomorrow) * 100).to_i

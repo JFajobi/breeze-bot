@@ -1,5 +1,5 @@
 class CarsController < AuthenticationsController
-
+  layout 'member_layout'
   def reserve_car
     member = Member.find params[:id]
     date = Time.at(params[:time].to_i).to_date

@@ -1,7 +1,3 @@
-%h2 View active cars | view vacant cars | View actionable cars
-%h3 Launch Analytics Page
-
-
 
 %a#fill-div-green{ :href => '#activeModal', :role => "button", "data-toggle" => 'modal'} Active Cars
 
@@ -10,6 +6,8 @@
 %a#fill-div-green{ :href => '#checkInModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked in 
 
 %a#fill-div-green{ :href => '#checkOutModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked out 
+
+%h3 Launch Analytics Page
 
 %h2 Complete Fleet
 - for car in @cars

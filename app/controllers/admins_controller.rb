@@ -1,5 +1,5 @@
 class AdminsController < AuthenticationsController
-  
+  layout 'admin_layout'
   def home
     @cars = Car.includes(:reservations).all
     @active_cars = @cars.select{|c|c.occupied?}
@@ -27,6 +27,13 @@ class AdminsController < AuthenticationsController
     @member = Member.includes({reservations: :car}).find(params[:id])
     @reservation_count = @member.reservations.count 
     @uniq_car_reservations = @member.reservations.uniq_by(&:car)
+  end
+
+  def check_reservation
+    car = Car.find(params[:car_id])
+    date = Time.at(params[:time]).to_date
+    occupied = car.occupied_on_date?(date)
+    render text: {:result => occupied}.to_json, :status => :ok
   end
 
   def vacate_car

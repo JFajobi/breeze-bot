@@ -8,5 +8,6 @@
   %body
     %p.notice= notice
     %p.alert= alert
+    = link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'nav left-nav-green'
     .container
       = yield
