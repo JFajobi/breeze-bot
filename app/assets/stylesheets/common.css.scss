@@ -1,0 +1,69 @@
+$green-color: #1dc28d;
+$orange-color: #f8922e;
+$blue-color: #233151;
+
+.main-nav{
+  border-bottom: 1px solid #071431;
+  background-color: $blue-color;
+  height: 70px;
+}
+
+.logo{
+  color: $green-color;
+  border-bottom: 1px solid $blue-color;
+}
+
+.logo:hover{
+  border-bottom: 1px solid $orange-color;
+  transition: border, .4s, linear;
+  color: $green-color;
+  text-decoration: none;
+}
+
+.logo-bar{
+  position: absolute;
+  left: 10%;
+  font-size: 3em;
+  font-weight: 100;
+  width: 15%;
+  height: 70px;
+  line-height: 70px;
+}
+
+.nav-bar{
+  position: absolute;
+  right: 5%;
+  font-size: 1.2em;
+  font-weight: 100;
+  width: 20%;
+  height: 70px;
+  line-height: 70px;
+}
+
+.actions-bar{
+  position: absolute;
+  right: 25%;
+  font-size: 1.2em;
+  font-weight: 100;
+  width: 25%;
+  height: 70px;
+  line-height: 70px;
+}
+
+.action-items{
+  color: $orange-color;
+  font-size: 1.3em;
+}
+
+.nav-button{
+  color:white;
+  margin-right: 7%;
+  border-bottom: 1px solid $blue-color;
+}
+
+.nav-button:hover{
+  border-bottom: 1px solid $orange-color;
+  transition: border, .4s, linear;
+  color: white;
+  text-decoration: none;
+}

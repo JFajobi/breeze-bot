@@ -6,13 +6,22 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    - action_count = Reservation.get_actionable_reservation_count
+    .main-nav
+      .logo-bar
+        =link_to 'Breeze Bot', '/determine_views', class: 'logo'
+      .actions-bar
+        %span.action-items #{action_count} Reservations Need Attention
+      .nav-bar
+        = link_to 'LAUNCH LIVE KPI', 'http://breeze-dashboard.herokuapp.com/breeze',target: 'blank', class: 'nav-button'
+        = link_to "SIGN OUT", destroy_member_session_path, method: :delete, class: 'nav-button'
+
     %p.notice= notice
     %p.alert= alert
     
-    - action_count = Reservation.get_actionable_reservation_count
-    #{action_count} reservations need your attention
 
-    = link_to "Sign Out", destroy_member_session_path, method: :delete, class: 'nav left-nav-green'
+
+    
 
     .container
       = yield

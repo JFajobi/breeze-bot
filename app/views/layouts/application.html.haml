@@ -6,6 +6,12 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    .main-nav
+      .logo-bar
+        =link_to 'Breeze Bot', '/determine_views', class: 'logo'
+      .nav-bar
+        = link_to 'SIGN UP', new_member_registration_path, class: 'nav-button'
+        = link_to 'LOG IN', new_member_session_path, class: 'nav-button'
     %p.notice= notice
     %p.alert= alert
     .container
