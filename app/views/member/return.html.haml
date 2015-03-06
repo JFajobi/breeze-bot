@@ -1,6 +1,8 @@
-%h1{:id=> @member} Would you like to schedule a return?
-
-%input.datepicker
+.row
+  %span.question-box.span7.offset2{:id=> @member} Schedule A Return?
+.row
+  .datepicker-holder.offset2.span7
+    %input.datepicker.datepicker-box.offset2.span7{:placeholder => 'Select A Return Date'}
 
 :coffeescript
   $ ->
@@ -9,7 +11,7 @@
       time = context['select']
       currentTime = new Date()
       if time >= currentTime.getTime()
-        id = $('h1').attr('id')
+        id = $('question_box').attr('id')
         window.location= "/return_car?time=" + time/1000 + "&id=" + id
       else
         $('.alert').html("Please pick a date after today")
@@ -17,3 +19,4 @@
     $('.datepicker').pickadate
       disable: [{ from: -100, to: true }]
       onSet: makeReservation
+      container: '.datepicker-holder'

@@ -40,6 +40,28 @@ $blue-color: #233151;
   line-height: 70px;
 }
 
+.box-holder{
+  
+}
+
+.datepicker-holder{
+  .input{
+    background-color: white;
+  }
+  margin-top: 230px;
+  border-radius: 5px;
+  border: 2px solid $green-color;
+}
+.datepicker-box{
+  height: 40px;
+}
+.question-box{
+  position: absolute;
+  height: 200px;
+  border: 2px solid $orange-color;
+  border-radius: 5px;
+}
+
 .actions-bar{
   position: absolute;
   right: 25%;
