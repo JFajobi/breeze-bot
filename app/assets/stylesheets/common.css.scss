@@ -13,6 +13,36 @@ $blue-color: #233151;
   border-bottom: 1px solid $blue-color;
 }
 
+.signin-box{
+  border: 1px solid $green-color;
+  padding: 10px;
+  background-color: $green-color;
+  color: white;
+  font-weight: 100;
+}
+
+.signin-box:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.button-holder{
+  margin-top: 12px;
+}
+
+.signup-box{
+  border: 1px solid $blue-color;
+  padding: 10px;
+  background-color: $blue-color;
+  color: $green-color;
+  font-weight: 100;
+}
+
+.signup-box:hover{
+  text-decoration: none;
+  color: $green-color;
+}
+
 .logo:hover{
   border-bottom: 1px solid $orange-color;
   transition: border, .4s, linear;
@@ -40,8 +70,28 @@ $blue-color: #233151;
   line-height: 70px;
 }
 
-.box-holder{
-  
+.homepage-container{
+  margin-top: 10%;
+}
+
+.homepage-image{
+  background-image: url("prius-drawing.png");
+  background-size:100%;
+  background-repeat: no-repeat;
+  height: 300px;
+
+}
+
+.toplevel-word{
+  font-size: 5em;
+  line-height: 100%;
+  font-weight: 100;
+}
+
+.secondlevel-words{
+  margin-top: 10px;
+  font-weight: 100;
+  font-size: 1.2em;
 }
 
 .datepicker-holder{
