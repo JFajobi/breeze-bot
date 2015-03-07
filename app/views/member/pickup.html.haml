@@ -1,4 +1,4 @@
-%h1 Your #{@car.make} #{@car.model} with a license of #{@car.license_number} will be available for pickup on #{@date}
+.info-line.lead.span10.offset1 Your #{@car.make} #{@car.model} with license plate number: #{@car.license_number} will be available for pickup on #{@date}
 
-
-= button_to "End Reservation","/end_reservation/#{@car.id}", {:controller => :cars, :action => 'end_reservation' }
+.cancel-button-holder.offset4
+  = button_to "Cancel Reservation","/end_reservation/#{@car.id}", {:controller => :cars, :action => 'end_reservation', :class => 'cancel-button' }

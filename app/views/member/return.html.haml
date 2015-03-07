@@ -1,8 +1,9 @@
-.row
-  %span.question-box.span7.offset2{:id=> @member} Schedule A Return?
-.row
-  .datepicker-holder.offset2.span7
-    %input.datepicker.datepicker-box.offset2.span7{:placeholder => 'Select A Return Date'}
+
+.info-line.lead.span10.offset1{:id=> @member} Are you ready to schedule a return?
+
+.picker-holder.offset3
+  %input.datepicker.span6{:placeholder => 'Select A Return Date'}
+
 
 :coffeescript
   $ ->

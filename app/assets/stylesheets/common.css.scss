@@ -13,6 +13,27 @@ $blue-color: #233151;
   border-bottom: 1px solid $blue-color;
 }
 
+.cancel-button{
+  height: 75px;
+  border: 2px solid $orange-color;
+  border-radius: 3px;
+  background-color: white;
+  color: $orange-color;
+  font-size: 2em;
+  font-weight: 200;
+  text-align: center;
+  line-height: 75px;
+  width: 42% !important;
+  margin-top: 3%;
+}
+
+.cancel-button:hover{
+  background-color: #ED4337;
+  color: white;
+  transition: background-color, .6s, linear;
+  border: 2px solid #ED4337;
+}
+
 .signin-box{
   border: 1px solid $green-color;
   padding: 10px;
@@ -24,6 +45,22 @@ $blue-color: #233151;
 .signin-box:hover{
   text-decoration: none;
   color: white;
+}
+
+.datepicker{
+  height: 50px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 200;
+  margin-top: 2%;
+}
+
+.info-line{
+  font-size: 3em;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 7%;
+  color: $orange-color;
 }
 
 .button-holder{
