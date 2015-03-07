@@ -176,3 +176,61 @@ $blue-color: #233151;
   color: white;
   text-decoration: none;
 }
+
+
+
+ // Sign In Styling
+
+ .signup {
+
+  .form-field{
+    margin-top:50px;
+  }
+
+  input[type=text],input[type=email],input[type=password]{
+    width: 275px;
+    height: 50px;
+    border: 2px solid $orange-color;
+    color: $orange-color;
+    font-size: 2em;
+  }
+
+  .margin20{margin-top:20px;}
+
+  .margin80{margin-top:80px;}
+
+  #button{
+    width: 290px;
+    height: 60px;
+    border: 1px solid $blue-color;
+    color: white;
+    font-size: 2em;
+    font-weight:100;
+    border-radius: 5px; 
+    padding: 4px 6px;  
+    background-color: $blue-color; 
+  }
+
+
+  ::-webkit-input-placeholder {
+   color: rgba(248,146,46, .32);
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+   color: rgba(248,146,46, .32);
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(248,146,46, .32);
+  }
+
+  :-ms-input-placeholder {  
+   color: rgba(248,146,46, .32);
+  }
+
+  input:focus { 
+    background-color: white;
+    color: $orange-color;
+  }
+
+}
