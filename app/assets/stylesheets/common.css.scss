@@ -36,7 +36,8 @@ $blue-color: #233151;
 
 .signin-box{
   border: 1px solid $green-color;
-  padding: 10px;
+  padding: 10px 25px;
+  font-size: 1.2em;
   background-color: $green-color;
   color: white;
   font-weight: 100;
@@ -69,7 +70,8 @@ $blue-color: #233151;
 
 .signup-box{
   border: 1px solid $blue-color;
-  padding: 10px;
+  padding: 10px 25px;
+  font-size: 1.2em;
   background-color: $blue-color;
   color: $green-color;
   font-weight: 100;
