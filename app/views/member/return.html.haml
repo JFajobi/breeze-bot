@@ -12,7 +12,7 @@
       time = context['select']
       currentTime = new Date()
       if time >= currentTime.getTime()
-        id = $('.question-box').attr('id')
+        id = $('.info-line').attr('id')
         window.location= "/return_car?time=" + time/1000 + "&id=" + id
       else
         $('.alert').html("Please pick a date after today")
@@ -20,4 +20,4 @@
     $('.datepicker').pickadate
       disable: [{ from: -100, to: true }]
       onSet: makeReservation
-      container: '.datepicker-holder'
+      container: '.picker-holder'

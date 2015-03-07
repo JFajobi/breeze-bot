@@ -51,7 +51,8 @@ class AdminsController < AuthenticationsController
 
   def occupy_car
     car = Car.find(params[:id])
-    car.vacate.occupy
+    car.occupy
+
     render :nothing => true, :status => :ok
   end
 
