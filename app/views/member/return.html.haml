@@ -11,7 +11,7 @@
       time = context['select']
       currentTime = new Date()
       if time >= currentTime.getTime()
-        id = $('question_box').attr('id')
+        id = $('.question-box').attr('id')
         window.location= "/return_car?time=" + time/1000 + "&id=" + id
       else
         $('.alert').html("Please pick a date after today")

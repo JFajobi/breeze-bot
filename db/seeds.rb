@@ -8,7 +8,7 @@ end
 def create_random_users
   @members = []
   user_count = 1
-  300.times do 
+  100.times do 
     m = Member.create email: "test_user#{user_count}@gmail.com", password: "12345678"
     user_count += 1
     @members << m
@@ -17,8 +17,8 @@ def create_random_users
 end
 
 def create_cars
-  200.times do 
-    c = Car.create make: 'Toyota', model: 'Prius', license_number:"#{rand(44)}b#{rand(55)}r#{rand(10)}"
+  90.times do 
+    c = Car.create make: 'Toyota', model: 'Prius', license_number:"#{rand(99)}b#{rand(99)}r#{rand(10)}"
   end
 end
 

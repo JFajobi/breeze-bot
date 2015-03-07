@@ -62,7 +62,7 @@ class CarsController < AuthenticationsController
     when days < 0
       "A Breeze-Bot professional is checking in your car, once done you can rent another"
     else
-      "You have #{days} left in your rental"
+      "You have #{days} days left in your rental"
     end
   end
 
