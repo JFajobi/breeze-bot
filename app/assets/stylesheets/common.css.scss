@@ -33,6 +33,44 @@ $blue-color: #233151;
   transition: background-color, .6s, linear;
   border: 2px solid #ED4337;
 }
+.accept-button{
+  text-align: center;
+  height: 70px;
+  line-height: 70px;
+  color: $blue-color;
+  font-size: 1.6em;
+  font-weight: 200;
+  text-decoration: none;
+  // border-radius: 5px;
+  margin-left: 7%;
+}
+
+.display-date{
+  text-align: center;
+  height: 70px;
+  line-height: 70px;
+  color: $orange-color;
+  font-size: 1.6em;
+  font-weight: 200;
+  text-decoration: none;
+  background-color: $blue-color;
+  margin-left: 7%; 
+  margin-bottom: 11%; 
+}
+
+.modal{
+  border-radius: 0;
+}
+.modal-header{
+  border-bottom: none;
+}
+
+.accept-button:hover{
+  color: $orange-color;
+  background-color: $blue-color;
+  transition: background-color, .2s, linear;
+  text-decoration: none;
+}
 
 .car-category-bar{
   margin-top: 3%;
@@ -66,6 +104,10 @@ $blue-color: #233151;
 
 .info{
   text-align: center;
+}
+
+.push-left{
+  margin-left: 19%;
 }
 
 .admin-car{
@@ -273,6 +315,18 @@ $blue-color: #233151;
     border-radius: 5px; 
     padding: 4px 6px;  
     background-color: $blue-color; 
+  }
+
+  .check_in_button, .check_out_button{
+    width: 290px;
+    height: 60px;
+    border: 1px solid $blue-color;
+    color: white;
+    font-size: 2em;
+    font-weight:100;
+    border-radius: 5px; 
+    padding: 4px 6px;  
+    background-color: $blue-color;  
   }
 
 

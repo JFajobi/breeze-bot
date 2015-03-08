@@ -31,46 +31,54 @@
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   .modal-body
     - for car in @active_cars
-      %h1 #{car.model} #{car.make}
-      %h2 License: #{car.license_number}
+      .admin-car.span3.offset1
+        %a#fill-div{:href => "/car/#{car.id}"} License Plate: #{car.license_number}
+
       - reservation = car.reservations.last
-      %h2 Active for: #{((Date.today.to_time - reservation.start_date.to_time)/1.day).round} days
+      .span5.display-date Active for: #{((Date.today.to_time - reservation.start_date.to_time)/1.day).round} days
   .modal-footer
-    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+    .close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
 
 #vacantModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   .modal-body
     - for car in @vacant_cars
-      %h1 #{car.model} #{car.make}
-      %h2 License: #{car.license_number}
+      .admin-car.span3.offset1
+        %a#fill-div{:href => "/car/#{car.id}"} License Plate: #{car.license_number}
   .modal-footer
-    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+    .close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
 
 #checkOutModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   .modal-body
     - for car in @picked_up_cars
-      %h1 #{car.model} #{car.make}
-      %h2 License: #{car.license_number}
-      %h2 Was this car picked up on #{car.reservations.last.start_date}
-      %h1.check_out_button{:id => car.id} Yes
+      .lead.span4.push-left Was this car picked up on #{car.reservations.last.start_date}
+      
+      .admin-car.span3.offset1
+        %a#fill-div{:href => "/car/#{car.id}"} License Plate: #{car.license_number}
+      .check_out_button.span5.accept-button{:id => car.id} Yes
+        
+        
   .modal-footer
-    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+    .close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
 
 #checkInModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   .modal-body
     - for car in @returned_cars
-      %h1 #{car.model} #{car.make}
-      %h2 License: #{car.license_number}
-      %h2 Was this car returned on #{car.reservations.last.end_date}
-      %h1.check_in_button{:id => car.id} Yes
+      .lead.span4.push-left Was this car returned on #{car.reservations.last.end_date}
+      
+      .admin-car.span3.offset1
+        %a#fill-div{:href => "/car/#{car.id}"} License Plate: #{car.license_number}
+      .check_in_button.span5.accept-button{:id => car.id} Yes
+
+        
+        
   .modal-footer
-    .small-launchbutton.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
+    .close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} close
 
 
 
