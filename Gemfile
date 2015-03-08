@@ -9,6 +9,7 @@ gem 'pg'
 gem 'httparty'
 gem 'haml-rails'
 gem 'sidekiq'
+gem 'redis'
 
 group :test, :development do 
   gem 'rspec-rails'

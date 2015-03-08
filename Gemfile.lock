@@ -190,6 +190,7 @@ DEPENDENCIES
   pickadate-rails
   pry
   rails (= 3.2.13)
+  redis
   rspec-rails
   sass-rails (~> 3.2.3)
   sidekiq
