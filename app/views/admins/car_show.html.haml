@@ -1,18 +1,22 @@
-= link_to 'Back to admin home', '/admin'
 
-%h1 #{@car.make} #{@car.model}: #{@car.license_number}
 
-%h2 Unique Members Rented: #{@reservation_count}
+.row.car-show-info
+  .show-car.span5
+    .show-info
 
-- if @reservation_count > 0
-  %h2 Rented By:
-  - for member_res in @uniq_member_reservations
-    - member = member_res.member
-    =link_to member.email, "/member/#{member.id}"
-
-Check if Car was checked out on a date
-%input.datepicker{:car_id => @car.id}
-.info
+  .span5.offset2
+    .lead License Plate: #{@car.license_number}
+    .lead Current Status: #{@car.status}
+    .lead Rental Count: #{@reservation_count}
+    - if @reservation_count > 0
+      .lead Rented By:
+      - for member_res in @uniq_member_reservations
+        - member = member_res.member
+        =link_to member.email, "/member/#{member.id}", :class => 'signup-boxx'
+    %br
+    %br
+    %input.datepicker{:car_id => @car.id, :placeholder => 'Car Availability'}
+    
 
 :coffeescript
   $ ->
@@ -25,9 +29,9 @@ Check if Car was checked out on a date
       $.postJSON "/check_reservation_on_date/" + car_id, {car_id: car_id, time: time}, (response) =>
         date = $('input').val()
         if response.result
-          $('.info').html 'This car was booked on ' + date
+          $('.show-info').html 'This car was booked on ' + date
         else
-          $('.info').html 'This car was available on ' + date
+          $('.show-info').html 'This car was available on ' + date
 
 
     $('.datepicker').pickadate

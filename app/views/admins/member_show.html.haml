@@ -1,14 +1,15 @@
-= link_to 'Back to admin home', '/admin'
 
 
-%h1 #{@member.email}
-- if @reservation_count == 1 
-  - @time = 'time' else @time = 'times'  
-%h2 Member has rented from us: #{@reservation_count} #{@time}
+.row.user-show-info
+  .show-user.span5
 
-- if @reservation_count > 0
-  %h2 Cars Rented:
-  - for car_res in @uniq_car_reservations
-    - car = car_res.car
-    %h1 #{car.make} #{car.model}: #{car.license_number}
-    %h3 Current status: #{car.status}
+  .span5.offset2
+    .lead User Name: #{@member.email}
+
+    .lead Rental Count: #{@reservation_count} #{@time}
+    - if @reservation_count > 0
+      - for car_res in @uniq_car_reservations
+        - car = car_res.car
+        .lead #{car.make} #{car.model}: #{car.license_number}
+        .lead Current status: #{car.status}
+    

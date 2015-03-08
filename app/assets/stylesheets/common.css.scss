@@ -7,6 +7,21 @@ $blue-color: #233151;
   background-color: $blue-color;
   height: 70px;
 }
+.user-show-info{margin-top:10%;}
+.show-car, .show-user{
+  background-image: url("car-outline.png");
+  background-size:100%;
+  background-repeat: no-repeat;
+  line-height: 175px;
+  vertical-align: center;
+  margin-bottom: 10px;
+  height: 175px;
+}
+
+.show-user{
+  background-image: url("license.jpg");
+  height: 300px;
+}
 
 .logo{
   color: $green-color;
@@ -137,7 +152,9 @@ $blue-color: #233151;
   transition: color, .4s, linear; 
 }
 
-
+.car-show-info{
+  margin-top: 10%;
+}
 .signin-box{
   border: 1px solid $green-color;
   padding: 10px 25px;
@@ -158,7 +175,10 @@ $blue-color: #233151;
   font-size: 2em;
   font-weight: 200;
   margin-top: 2%;
+  cursor: pointer;
 }
+
+.datepicker:hover{cursor:pointer;}
 
 .info-line{
   font-size: 3em;
@@ -181,9 +201,29 @@ $blue-color: #233151;
   font-weight: 100;
 }
 
+.show-info{
+  font-size: 1.1em;
+  color: $orange-color;
+  text-align: center;
+}
+
 .signup-box:hover{
   text-decoration: none;
   color: $green-color;
+}
+
+.signup-boxx{
+  border: 1px solid $blue-color;
+  padding: 10px 25px;
+  font-size: 1.2em;
+  background-color: $blue-color;
+  color: white;
+  font-weight: 100;
+}
+
+.signup-boxx:hover{
+  text-decoration: none;
+  color: white;
 }
 
 .logo:hover{

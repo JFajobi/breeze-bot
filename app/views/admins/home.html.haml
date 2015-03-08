@@ -124,7 +124,6 @@
       
      
       $.postJSON '/check_in_car', {id: car_id}, (response) =>
-        console.log "Friend Request Made"
 
 
     checkOutCar = (e)->
@@ -134,7 +133,6 @@
       $("#"+ e.currentTarget.id).html("The car has been sucessfully checked out")
       
       $.postJSON '/check_out_car', {id: car_id}, (response) =>
-        console.log "Friend Request Made"
 
      
     $('.check_out_button').on('click', checkOutCar)
