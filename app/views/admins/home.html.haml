@@ -1,26 +1,29 @@
+.car-category-bar
+  %a.fill-div.span2.offset2.car-category{ :href => '#activeModal', :role => "button", "data-toggle" => 'modal'} Active Cars
 
-%a#fill-div-green{ :href => '#activeModal', :role => "button", "data-toggle" => 'modal'} Active Cars
+  %a.fill-div.span2.car-category{ :href => '#vacantModal', :role => "button", "data-toggle" => 'modal'} Vacant Cars
 
-%a#fill-div-green{ :href => '#vacantModal', :role => "button", "data-toggle" => 'modal'} Vacant Cars
+  %a.fill-div.span2.car-category{ :href => '#checkInModal', :role => "button", "data-toggle" => 'modal'} Checked In 
 
-%a#fill-div-green{ :href => '#checkInModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked in 
+  %a.fill-div.span2.car-category{ :href => '#checkOutModal', :role => "button", "data-toggle" => 'modal'} Checked Out 
+%br
+%br
+.date-row.offset3
+  %input.date.startDate.span6{:position => 'start', :placeholder => 'Check Utilization Within Date Range', :time => ''} 
+  %input.date.endDate.hidden.span6{:position => 'end', :placeholder => 'End Date', :time => ''} 
 
-%a#fill-div-green{ :href => '#checkOutModal', :role => "button", "data-toggle" => 'modal'} Cars needing checked out 
-
-%h4 Check percentage of fleet used in date range
-%input.date.startDate{:position => 'start', :placeholder => 'Start Date', :time => ''} 
-
-%input.date.endDate.hidden{:position => 'end', :placeholder => 'End Date', :time => ''} 
-
-.info
+%br
+.info.lead
 
 
-%h3 Launch Analytics Page
 
-%h2 Complete Fleet
-- for car in @cars
-  %h3 #{car.make} #{car.model} #{car.license_number}
-  = link_to 'car page', "/car/#{car.id}"
+
+.lead.car-header Current Complete Fleet
+.row
+  - for car in @cars
+    .admin-car.span2
+      %a#fill-div{:href => "/car/#{car.id}"} License Plate: #{car.license_number}
+  
 
 
 #activeModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -99,6 +102,7 @@
 
 
     $('.date').pickadate
+      container: '.date-row'
       onSet: checkReservationRange
 
 
