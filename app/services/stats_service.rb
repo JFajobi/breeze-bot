@@ -7,7 +7,8 @@ class StatsService
     end
 
     def update_admin_dashboard(widget_id, data_id, data_value)
-      DashboardWorker.perform_async(widget_id, data_id, data_value)
+      HTTParty.post(BreezeBot::Application.config.dashboard_url + "/#{widget_id}",
+        :body => { "auth_token" => "YOUR_AUTH_TOKEN", "#{data_id}" => "#{data_value}" }.to_json)
       # HTTParty.post("http://localhost:3030/dashboards/breeze",
       #   :body => { "auth_token" => "YOUR_AUTH_TOKEN", "event" => "reload" }.to_json)
     end

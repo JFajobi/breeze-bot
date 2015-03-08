@@ -20,11 +20,8 @@ BreezeBot::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.dashboard_url = 'http://localhost:3030/dashboards/breeze'
+  config.dashboard_url = "http://breeze-dashboard.herokuapp.com/widgets/"
 
-  config.redis_connection = 'redis://redistogo:5b42cf3f12befc416ff0d3b5733353b0@angelfish.redistogo.com:10690/'
-
-  config.REDISTOGO_URL = 'redis://redistogo:5b42cf3f12befc416ff0d3b5733353b0@angelfish.redistogo.com:10690/'
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
