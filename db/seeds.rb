@@ -13,11 +13,11 @@ def create_random_users
     user_count += 1
     @members << m
   end
-  @member_sliced = @members.each_slice(20).to_a
+  @member_sliced = @members.each_slice(10).to_a
 end
 
 def create_cars
-  90.times do 
+  150.times do 
     c = Car.create make: 'Toyota', model: 'Prius', license_number:"#{rand(99)}b#{rand(99)}r#{rand(10)}"
   end
 end
@@ -32,7 +32,7 @@ def create_pending_pickups
   end
 end
 
-def created_occupied_cars
+def create_occupied_cars
   @member_sliced[1].each do |m|
     m.create_reservation(Date.today - rand(30))
     res = m.reservations.last
@@ -104,10 +104,10 @@ def seed_database
   make_admins
   create_random_users
   create_cars
-  create_pending_pickups
-  created_occupied_cars
-  create_pending_returns
   create_past_reservations
+  create_pending_pickups
+  create_occupied_cars
+  create_pending_returns
 end
 
 seed_database

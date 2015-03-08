@@ -34,4 +34,6 @@ BreezeBot::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.dashboard_url = 'http://localhost:3030/dashboards/widgets'
 end

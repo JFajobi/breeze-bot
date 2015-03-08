@@ -34,4 +34,6 @@ BreezeBot::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.dashboard_url = 'http://localhost:3030/dashboards/widgets'
 end
