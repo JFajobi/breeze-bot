@@ -9,6 +9,7 @@
 %br
 %br
 .date-row.offset3
+  .lead.alert-text.span6
   %input.date.startDate.span6{:position => 'start', :placeholder => 'Check Utilization Within Date Range', :time => ''} 
   %input.date.endDate.hidden.span6{:position => 'end', :placeholder => 'End Date', :time => ''} 
 
@@ -88,6 +89,8 @@
 
     checkReservationRange = (context) ->
       return unless context['select'] 
+      $('.alert-text').html('')
+      return $('.alert-text').html("Please Choose Dates Before Today") if context['select'] > new Date().getTime()
       if $('.startDate').attr('time') == ''
         $('.startDate').attr('time', context['select']/1000 )
         $('.date').toggleClass('hidden')
@@ -95,7 +98,7 @@
       start_date = $('.startDate').attr('time')
       end_date = context['select']/1000
 
-      return $('.alert').html("End Date Must Be Later Than Start Date") if parseInt(start_date) > parseInt(end_date)
+      return $('.alert-text').html("End Date Must Be Later Than Start Date") if parseInt(start_date) > parseInt(end_date)
 
       $('.startDate').attr('time', '')
       $('.startDate').val('')

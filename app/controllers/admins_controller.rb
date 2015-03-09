@@ -20,7 +20,8 @@ class AdminsController < AuthenticationsController
   def check_fleet_utilization
     start_date = Time.at(params[:start_date].to_i).to_date
     end_date = Time.at(params[:end_date].to_i).to_date
-    percent = (StatsService.percent_utilized_within_range(start_date, end_date) * 100).round  
+    percent = (StatsService.percent_utilized_within_range(start_date, end_date) * 100).round 
+
     render text: {:percent => percent, :start => start_date, :end => end_date}.to_json, :status => :ok
   end
 

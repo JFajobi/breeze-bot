@@ -18,7 +18,7 @@ class StatsService
       reservation_sum = 0
 
       total_occupiable_time = get_total_occupiable_time(fleet_size, start_date, end_date)
-
+      
       # find all reservations that started before the end_date
       potential_reservations = Reservation.where("start_date <= ?", end_date)
 
@@ -29,9 +29,12 @@ class StatsService
       altered_reservations      = map_reservation_usage_time(start_date, end_date, utilized_car_reservations)
       
       # the total amount of time (days) that a fleet of cars were being utilized
-      altered_reservations.each{ |res| reservation_sum += ((res.end_date.to_time.to_i - res.start_date.to_time.to_i)/1.day.to_i)}
-      
+      # JS datepicker library or something is not returning full complete days. So convert to float adn round
+      # TODO fix
+      altered_reservations.each{ |res| reservation_sum += ((res.end_date.to_time.to_i.to_f - res.start_date.to_time.to_i.to_f)/1.day.to_i.to_f).round}
+
       reservation_sum.to_f / total_occupiable_time.to_f
+      
     end
 
     # we only want to count the time a car was reserved inbetween our search window
