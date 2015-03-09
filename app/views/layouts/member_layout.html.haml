@@ -11,7 +11,9 @@
         =link_to 'Breeze Bot', '/determine_views', class: 'logo'
       .nav-bar
         = link_to "SIGN OUT", destroy_member_session_path, method: :delete, class: 'nav-button'
-    %p.notice= notice
-    //%p.alert= alert
+    - if flash[:notice]
+      .notice= flash[:notice]
+    - if flash[:alert]
+      .alert= flash[:alert]
     .container
       = yield

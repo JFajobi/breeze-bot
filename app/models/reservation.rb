@@ -25,10 +25,10 @@ class Reservation < ActiveRecord::Base
 
   def self.get_actionable_reservation_count
     checkout_cars = Reservation.includes(:car).where("start_date <= ?", Date.today)
-    checkin_cars = Reservation.includes(:car).where("end_date >= ?", Date.today)
+    checkin_cars = Reservation.includes(:car).where("end_date <= ?", Date.today)
 
-    car_actions_count = checkout_cars.keep_if{|r| r.car.pending_pickup?}.count
-    car_actions_count += checkin_cars.keep_if{|r| r.car.pending_return?}.count
+    car_actions_count = checkout_cars.select{|r| r.car.pending_pickup? && r.active}.count
+    car_actions_count += checkin_cars.select{|r| r.car.pending_return? && r.active}.count
   end
   
   # update admin dashboard with new stats

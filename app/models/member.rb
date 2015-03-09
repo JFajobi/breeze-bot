@@ -8,7 +8,7 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
   # attr_accessible :title, :body
 
-  after_save :update_dashboard
+  after_create :update_dashboard
   after_destroy :update_dashboard
   has_many :reservations
   has_many :cars, through: :reservations

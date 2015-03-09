@@ -6,11 +6,12 @@ class AdminsController < AuthenticationsController
     @vacant_cars = @cars.select{|c|c.unoccupied?}
     
     @returned_cars = @cars.select do |c|
+      next if c.reservations.last.nil?
       (c.pending_return? && (c.reservations.last.end_date <= Date.today))
     end
   
     @picked_up_cars = @cars.select do |c| 
-      next if c.reservations.last.nil? #TODO remove after testing and clean data is in 
+      next if c.reservations.last.nil? 
       (c.pending_pickup? && (c.reservations.last.start_date <= Date.today))
     end
 
